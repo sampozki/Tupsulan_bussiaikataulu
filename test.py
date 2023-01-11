@@ -25,11 +25,11 @@ for stopID in stopIDList:
     for stop in data['body'][str(stopID)]:
 
         # Sometimes there is no aimedArrivalTime key
-        if 'aimedArrivalTime' in stop['call']:
-            aimedArrivalTime = parser.parse(stop['call']['aimedArrivalTime'])
-        else:
+        if 'expectedDepartureTime' in stop['call']:
             aimedArrivalTime = parser.parse(stop['call']['expectedDepartureTime'])
+        else:
+            aimedArrivalTime = parser.parse(stop['call']['aimedArrivalTime'])
 
-        print("Bus: " + stop['lineRef']+ ", Time Arrival: " + aimedArrivalTime.strftime("%H:%M"))
+        print("Bus: " + stop['lineRef']+ ", Time Arrival: " + aimedArrivalTime.strftime("%H:%M") + " (tracked)")
     
     print()
